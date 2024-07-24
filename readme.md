@@ -1,4 +1,4 @@
-#js-particles-factory
+# js-particles-factory
 
 js-particles-factory is a JavaScript library designed to create and animate particles on an HTML canvas element. The particles float around and interact.<br>
 
@@ -18,7 +18,7 @@ No dependencies
 
 ---
 
-##Features
+## Features
 
 * Customizable Particles:<br>
 Define shapes (circle, square, rhombus, hexagon, triangle), sizes, and colors.
@@ -39,7 +39,7 @@ Start, stop, and adjust particle animation settings.
 
 
 ---
-##Installation
+## Installation
 You can install js-particles-factory via npm:
 
 ```js
@@ -55,7 +55,7 @@ or copy the [particle.factory.es.js](./minified/particles-factory.es.js) into yo
 (CDN will follow)
 
 ---
-##Usage
+## Usage
 
 Basic Setup
 Create an HTML Canvas Element
@@ -63,7 +63,7 @@ Create an HTML Canvas Element
 ```
 <canvas id="particles-canvas"></canvas>
 ```
-####Builtin config with default-settings.
+#### Builtin config with default-settings.
 Whether you pass your own config-Object or only pass some changes in an object to the constructor, the defaults get merged with your arguments.
 
 ```js
@@ -96,7 +96,7 @@ Whether you pass your own config-Object or only pass some changes in an object t
 
 
 ```
-###Initialize the Particle System
+### Initialize the Particle System
 
 ```js
 import { ParticlesFactory } from 'js-particles-factory';
@@ -140,21 +140,24 @@ const particles = new ParticlesFactory({
   }
 });
 ```
+
+Click [here](https://github.com/BarbWire-1/js-particles-factory-example) to see an example usage
+
 ---
 
-##API
-##ParticlesFactory<br>
-####Constructor:
+## API
+## ParticlesFactory<br>
+#### Constructor:
 
 ```js
 new ParticlesFactory(options)
 ```
-####Options:
+#### Options:
 
 Configuration object for the particle system.<br>
 The above passed objects shows the defaultSettings.
 
-####Methods:
+#### Methods:
 
   * setFillMode(mode)<br>
 Set the fill mode for particles.<br>
@@ -177,12 +180,12 @@ Start or stop the animation.
 
 
 
-##Particle
+## Particle
 The Particle class is not exposed but component of the ParticlesFactory
 <details>
   <summary>Click to expand for more details</summary>
 
-###Constructor:
+### Constructor:
 ```js
 new Particle(canvas, x, y, size, speed, fillStyle)
 ```
@@ -193,7 +196,7 @@ size: Size (diameter) of the particle.<br>
 speed: Movement speed of the particle.<br>
 fillStyle: Color of the particle.<br>
 
-###Methods:
+### Methods:
 
 drawParticle(fillColor, opacity, size, shape, strokeStyle)<br>
 Draw the particle on the canvas.
@@ -213,8 +216,8 @@ Update the particle’s speed (on collision).
 handleMouseMove(event, mouseDistance, canvasX, canvasY)<br>
 Handle the particle's behavior when the mouse moves nearby.
 
-##Configuration Options
-####Canvas
+## Configuration Options
+#### Canvas
 id: ID of the canvas element.<br>
 width: Width of the canvas.<br>
 height: Height of the canvas.<br>
@@ -228,7 +231,7 @@ isFullScreen: Toggle fullscreen mode.<br>
 isResponsive: Adjust canvas size on window resize.<br>
 
 
-####Particles
+#### Particles
 shape: Shape of the particles.<br>
 fillStyle: Base color of particles.<br>
 randomFill: Whether particles have random colors.<br>
@@ -240,7 +243,7 @@ draw: Whether to draw particles.<br>
 collision: Whether to detect collisions.<br>
 opacity: Opacity of particles.<br>
 
-####Lines
+#### Lines
 connectDistance: Distance within which lines are drawn between particles.<br>
 strokeStyle: Color of the lines.<br>
 draw: Whether to draw lines.<br>
@@ -250,8 +253,8 @@ opacity: Opacity of the lines.<br>
 </details>
 
 ---
-##Contributing
+## Contributing
 Contributions are welcome! Please submit issues or pull requests via GitHub. For more information on how to contribute, see CONTRIBUTING.md.
 
-##License
+## License
 This project is licensed under the MIT License - see the LICENSE file for details.
