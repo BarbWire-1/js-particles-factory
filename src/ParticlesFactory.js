@@ -310,19 +310,22 @@ class ParticlesFactory {
 
 	//-------------------------------------------------------------------UPDATES
 	setFillMode(mode) {
-		if (mode === "random")
-			this.particles.randomFill = true;
-		if (mode === "fill") {
-			this.particles.randomFill = true;
-			this.#particlesObjects.forEach(
-				(p) => (p.fillStyle = this.particles.fillStyle)
-			);
-		}
+
 		if (mode === "noFill") {
 			this.particles.noFill = true;
 			this.#particlesObjects.forEach(
 				(p) => (p.fillStyle = "transparent")
 			);
+		} else {
+			this.particles.noFill = false
+			if (mode === "random")
+				this.particles.randomFill = true;
+			if (mode === "fill") {
+				this.particles.randomFill = true;
+				this.#particlesObjects.forEach(
+					(p) => (p.fillStyle = this.particles.fillStyle)
+				);
+			}
 		}
 	}
 

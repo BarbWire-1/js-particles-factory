@@ -1,6 +1,6 @@
 // EXAMPLE using the min.js directly from a local path
 
-import { ParticlesFactory } from "../minified/particles-factory.min.js";
+import { ParticlesFactory } from "../minified/particles-factory.es.js";
 
 //minimal instantion with default settings
 // requires your canvas having an id of 'particles-camvas')
@@ -56,9 +56,8 @@ myParticles.setNumParticles(50);
 myParticles.setSpeed(2);
 // IF randomsize - adjusts all randomsizes to new baseSize
 myParticles.setBaseSize(80);
-myParticles.setFillMode("noFill");// "random" || "fill" || "noFill"
-myParticles.particles.noFill = false;
-myParticles.particles.randomFill = true;
+myParticles.setFillMode("random");// "random" || "fill" || "noFill"
+
 
 
 

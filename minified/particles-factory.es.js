@@ -90,7 +90,7 @@ const C = class C {
     y(this, p, []), y(this, M, ((s = this.particles) == null ? void 0 : s.size) || 2), y(this, F, r(this, e, Z).call(this, r(this, e, R))), r(this, e, q).call(this), r(this, e, B).call(this), r(this, e, A).call(this), r(this, e, k).call(this);
   }
   setFillMode(t) {
-    t === "random" && (this.particles.randomFill = !0), t === "fill" && (this.particles.randomFill = !0, l(this, p).forEach((i) => i.fillStyle = this.particles.fillStyle)), t === "noFill" && (this.particles.noFill = !0, l(this, p).forEach((i) => i.fillStyle = "transparent"));
+    t === "noFill" ? (this.particles.noFill = !0, l(this, p).forEach((i) => i.fillStyle = "transparent")) : (this.particles.noFill = !1, t === "random" && (this.particles.randomFill = !0), t === "fill" && (this.particles.randomFill = !0, l(this, p).forEach((i) => i.fillStyle = this.particles.fillStyle)));
   }
   setSpeed(t) {
     this.main.speed = t, l(this, p).forEach((i) => {
