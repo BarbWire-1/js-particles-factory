@@ -1,6 +1,6 @@
 {
 	"name": "js-particles-factory",
-	"version": "1.0.0",
+	"version": "1.0.0001",
 	"description": "A library for particle effects.",
 	"main": "dist/particles-factory.umd.js",
 	"module": "dist/particles-factory.es.js",
