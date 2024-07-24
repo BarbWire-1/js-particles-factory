@@ -8,22 +8,21 @@
     "prepublishOnly": "vite"
   },
   "devDependencies": {
-    "vite": "^5.3.4"
+    "@rollup/plugin-strip": "^3.0.4",
+    "@rollup/plugin-terser": "^0.4.4",
+    "terser": "^5.31.3",
+    "vite": "^5.3.4",
+    "vite-plugin-remove-console": "^2.2.0"
   },
-
-    "description": "A library for particle effects.",
-    "main": "./src/index.js",
-
-    "keywords": [
-      "particles",
-      "animation",
-      "lighweight",
-      "no dependencies",
-      "vanilla js"
-    ],
-    "author": "Barbara Kälin ak BarbWire",
-    "license": "MIT",
-    "dependencies": {}
-
-
+  "description": "A library for particle effects.",
+  "main": "./src/index.js",
+  "keywords": [
+    "particles",
+    "animation",
+    "lighweight",
+    "no dependencies",
+    "vanilla js"
+  ],
+  "author": "Barbara Kälin ak BarbWire",
+  "license": "MIT"
 }

@@ -7,7 +7,7 @@ import { Particle } from './Particle.js';
 // TODO include min.js in repo
 
 //console.time('factory')
-export class ParticlesFactory {
+class ParticlesFactory {
 	#ctx;
 	#particlesObjects;
 	#animationId;
@@ -368,6 +368,10 @@ export class ParticlesFactory {
 		});
 		this.#originalBaseSize = newBaseSize;
 	}
+	toggleFullScreen() {
+		this.main.isFullScreen = !this.main.isFullScreen;
+		this.getCanvasSize();
+	}
 
 	// --------------------------------------------------------------BEHAVIOUR
 	// inner loop to get otherParticle - distance
@@ -471,3 +475,7 @@ export class ParticlesFactory {
 	}
 	*/
 }
+
+// Export for ES module usage
+export default ParticlesFactory;
+export { ParticlesFactory };
