@@ -321,7 +321,7 @@ class ParticlesFactory {
 		if (mode === "noFill") {
 			this.particles.noFill = true;
 			this.#particlesObjects.forEach(
-				(p) => (p.fillStyle = "none")
+				(p) => (p.fillStyle = "transparent")
 			);
 		}
 	}

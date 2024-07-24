@@ -1,4 +1,6 @@
-import { ParticlesFactory } from "./src/particles-factory.min.js";
+// EXAMPLE using the min.js directly from a local path
+
+import { ParticlesFactory } from "../minified/particles-factory.min.js";
 
 //minimal instantion with default settings
 // requires your canvas having an id of 'particles-camvas')
