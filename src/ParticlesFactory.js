@@ -309,11 +309,21 @@ class ParticlesFactory {
 	}
 
 	//-------------------------------------------------------------------UPDATES
-	setColorMode(newValue) {
-		his.particles.fillStyle = newValue
-		this.#particlesObjects.forEach(
-			(p) => (p.fillStyle = this.particles.fillStyle)
-		);
+	setFillMode(mode) {
+		if (mode === "random")
+			this.particles.randomFill = true;
+		if (mode === "fill") {
+			this.particles.randomFill = true;
+			this.#particlesObjects.forEach(
+				(p) => (p.fillStyle = this.particles.fillStyle)
+			);
+		}
+		if (mode === "noFill") {
+			this.particles.noFill = true;
+			this.#particlesObjects.forEach(
+				(p) => (p.fillStyle = "none")
+			);
+		}
 	}
 
 	// update on changes

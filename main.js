@@ -49,11 +49,14 @@ myParticles.particles.randomFill = false;
 myParticles.particles.randomSize = true;
 myParticles.lines.connectDistance = 100;
 
-myParticles.toggleFullScreen();
+//myParticles.toggleFullScreen();
 myParticles.setNumParticles(50);
 myParticles.setSpeed(2);
 // IF randomsize - adjusts all randomsizes to new baseSize
 myParticles.setBaseSize(80);
+myParticles.setFillMode("noFill");// "random" || "fill" || "noFill"
+myParticles.particles.noFill = false;
+myParticles.particles.randomFill = true;
 
 
 
