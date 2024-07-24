@@ -1,0 +1,29 @@
+{
+  "name": "js-particles-factory",
+  "private": false,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "prepublishOnly": "vite"
+  },
+  "devDependencies": {
+    "vite": "^5.3.4"
+  },
+
+    "description": "A library for particle effects.",
+    "main": "./src/index.js",
+
+    "keywords": [
+      "particles",
+      "animation",
+      "lighweight",
+      "no dependencies",
+      "vanilla js"
+    ],
+    "author": "Barbara Kälin ak BarbWire",
+    "license": "MIT",
+    "dependencies": {}
+
+
+}
