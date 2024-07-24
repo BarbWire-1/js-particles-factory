@@ -1,41 +1,118 @@
-js-particles-factory
-js-particles-factory is a JavaScript library designed to create and animate particles on an HTML canvas element. This library allows you to customize particles with various shapes, sizes, and behaviors, and provides interactive and visually appealing effects for web applications.
+#js-particles-factory
 
-Features
-Customizable Particles: Define shapes (circle, square, rhombus, hexagon, triangle), sizes, and colors.
-Collision Detection: Particles can interact with each other and respond to collisions.
-Responsive Design: Adjusts to window resizing and fullscreen modes.
-Mouse Interaction: Particles react to mouse movements.
-Flexible Animation Controls: Start, stop, and adjust particle animation settings.
-Installation
+js-particles-factory is a JavaScript library designed to create and animate particles on an HTML canvas element. The particles float around and interact.<br>
+
+This library allows you to customize particles with various shapes, sizes, and behaviors, and provides interactive and visually appealing effects for web applications.
+
+Built with vanilla JS/HTML/CSS<br>
+No dependencies
+
+---
+
+[Installation](##Installation)<br>
+[Usage](##Usage)<br>
+[API](##API)<br>
+[ParticlesFactory](##ParticlesFactory)<br>
+[Particle](##Particle)<br>
+[License](##License)<br>
+---
+
+##Features
+
+* Customizable Particles:<br>
+Define shapes (circle, square, rhombus, hexagon, triangle), sizes, and colors.
+
+* Collision Detection:<br>
+Particles can interact with each other and respond to collisions.
+
+* Responsive Design:<br>
+Adjusts to window resizing and fullscreen modes.
+
+* Mouse Interaction:<br>
+Particles react to mouse movements.
+
+* Flexible Animation Controls:<br>
+Start, stop, and adjust particle animation settings.
+
+* Simply adjustable, throttled  framerate (requestAnimationFrame)
+
+
+---
+##Installation
 You can install js-particles-factory via npm:
 
 ```js
 npm install js-particles-factory
 ```
 Alternatively, include it directly in your HTML with a script tag:
+```
+<script type="module">
+  import { ParticlesFactory } from 'https://unpkg.com/js-particles-factory@1.0.2/dist/particles-factory.es.js';
+</script>
+```
+or copy the [particle.factory.es.js](./minified/particles-factory.es.js) into your project and import **ParticlesFactory** directly.<br>
+(CDN will follow)
 
-![My animated logo](testHTML.svg)
-
-Usage
+---
+##Usage
 
 Basic Setup
 Create an HTML Canvas Element
 
-```html
+```
 <canvas id="particles-canvas"></canvas>
 ```
+####Builtin config with default-settings.
+Whether you pass your own config-Object or only pass some changes in an object to the constructor, the defaults get merged with your arguments.
+
+```js
+{
+  canvas: { id: 'particles-canvas', width: 800, height: 600 },
+  main: {
+    frameRate: 30,
+    numParticles: 100,
+    speed: 0.5,
+    fillStyle: '#000',
+    isFullScreen: true
+  },
+  particles: {
+    shape: 'circle',
+    fillStyle: '#ff0000',
+    randomSize: true,
+    stroke: true,
+    size: 20,
+    opacity: 0.8
+  },
+  lines: {
+    connectDistance: 100,
+    strokeStyle: '#ffffff',
+    draw: true,
+    lineWidth: 1,
+    opacity: 0.5
+  }
+}
 
 
-Initialize the Particle System
+
+```
+###Initialize the Particle System
 
 ```js
 import { ParticlesFactory } from 'js-particles-factory';
-
-// minimal initialisation with all default settings
+```
+Minimal initialisation with all default settings:
+```js
 // requires a canvas with the exact id "particles-canvas"
 const particles = new ParticlesFactory();
-
+```
+Initialisation with eg just another canvasId:<br>
+(**Note:** you need to pass the individual settings as object.)
+```js
+const particles = new ParticlesFactory({canvas:{id: "your-canvas-id"}});
+```
+Or with a full config-object you can create in the netlify playfile:<br>
+//TODO add another config here and link to netlify
+```js
 const particles = new ParticlesFactory({
   canvas: { id: 'particles-canvas', width: 800, height: 600 },
   main: {
@@ -62,101 +139,118 @@ const particles = new ParticlesFactory({
   }
 });
 ```
+---
 
-
-API
-ParticlesFactory
-Constructor:
+##API
+##ParticlesFactory<br>
+####Constructor:
 
 ```js
 new ParticlesFactory(options)
 ```
-options: Configuration object for the particle system.
+####Options:
+
+Configuration object for the particle system.<br>
 The above passed objects shows the defaultSettings.
-Methods:
 
-setFillMode(mode)
-Set the fill mode for particles. Modes: "noFill", "random", "fill".
+####Methods:
 
-setSpeed(newSpeed)
+  * setFillMode(mode)<br>
+Set the fill mode for particles.<br>
+Modes: "noFill", "random", "fill".
+
+  * setSpeed(newSpeed)<br>
 Update the speed of particles.
 
-setNumParticles(newValue)
-Set the number of particles in the system.
+  * setNumParticles(newValue)<br>
+Update the number of particles in the system.
 
-setBaseSize(newBaseSize)
-Update the base size of particles.
+  * setBaseSize(newBaseSize)<br>
+Adjust the new base size of all particles when they're set to randomSize.
 
-toggleFullScreen()
-Toggle fullscreen mode.
+  * toggleFullScreen()<br>
+Toggle between fullscreen mode and canvas size.
 
-toggleAnimation()
+  * toggleAnimation()<br>
 Start or stop the animation.
 
-Particle
-Constructor:
 
-javascript
-Code kopieren
+
+##Particle
+The Particle class is not exposed but component of the ParticlesFactory
+<details>
+  <summary>Click to expand for more details</summary>
+
+###Constructor:
+```js
 new Particle(canvas, x, y, size, speed, fillStyle)
-canvas: The canvas element.
-x: X-coordinate of the particle.
-y: Y-coordinate of the particle.
-size: Size (diameter) of the particle.
-speed: Movement speed of the particle.
-fillStyle: Color of the particle.
-Methods:
+```
+canvas: The canvas element.<br>
+x: X-coordinate of the particle.<br>
+y: Y-coordinate of the particle.<br>
+size: Size (diameter) of the particle.<br>
+speed: Movement speed of the particle.<br>
+fillStyle: Color of the particle.<br>
 
-drawParticle(fillColor, opacity, size, shape, strokeStyle)
+###Methods:
+
+drawParticle(fillColor, opacity, size, shape, strokeStyle)<br>
 Draw the particle on the canvas.
 
-keepInBoundaries(drawParticles)
+keepInBoundaries(drawParticles)<br>
 Ensure the particle stays within the canvas boundaries.
 
-particlesCollision(isRandomSize, commonSize, particle, otherParticle, distance)
+particlesCollision(isRandomSize, commonSize, particle, otherParticle, distance)<br>
 Handle collisions between particles.
 
-updateCoords(drawParticles)
-Update the particle’s coordinates.
+updateCoords(drawParticles)<br>
+Recalculate the particle’s coordinates.
 
-updateSpeed(speed)
-Update the particle’s speed.
+updateSpeed(speed)<br>
+Update the particle’s speed (on collision).
 
-handleMouseMove(event, mouseDistance, canvasX, canvasY)
+handleMouseMove(event, mouseDistance, canvasX, canvasY)<br>
 Handle the particle's behavior when the mouse moves nearby.
 
-Configuration Options
-Canvas
-id: ID of the canvas element.
-width: Width of the canvas.
-height: Height of the canvas.
-Main
-frameRate: Animation frame rate.
-numParticles: Number of particles to generate.
-speed: Base speed of particles.
-mouseDistance: Distance within which particles react to the mouse.
-fillStyle: Background color of the canvas.
-isFullScreen: Toggle fullscreen mode.
-isResponsive: Adjust canvas size on window resize.
-Particles
-shape: Shape of the particles.
-fillStyle: Base color of particles.
-randomFill: Whether particles have random colors.
-noFill: Whether particles are transparent.
-stroke: Whether particles have a stroke.
-size: Base size of particles.
-randomSize: Whether particles have random sizes.
-draw: Whether to draw particles.
-collision: Whether to detect collisions.
-opacity: Opacity of particles.
-Lines
-connectDistance: Distance within which lines are drawn between particles.
-strokeStyle: Color of the lines.
-draw: Whether to draw lines.
-lineWidth: Width of the lines.
-opacity: Opacity of the lines.
-Contributing
+##Configuration Options
+####Canvas
+id: ID of the canvas element.<br>
+width: Width of the canvas.<br>
+height: Height of the canvas.<br>
+####Main
+frameRate: Animation frame rate.<br>
+numParticles: Number of particles to generate.<br>
+speed: Base speed of particles.<br>
+mouseDistance: Distance within which particles react to the mouse.<br>
+fillStyle: Background color of the canvas.<br>
+isFullScreen: Toggle fullscreen mode.<br>
+isResponsive: Adjust canvas size on window resize.<br>
+
+
+####Particles
+shape: Shape of the particles.<br>
+fillStyle: Base color of particles.<br>
+randomFill: Whether particles have random colors.<br>
+noFill: Whether particles are transparent.<br>
+stroke: Whether particles have a stroke.<br>
+size: Base size of particles.<br>
+randomSize: Whether particles have random sizes.<br>
+draw: Whether to draw particles.<br>
+collision: Whether to detect collisions.<br>
+opacity: Opacity of particles.<br>
+
+####Lines
+connectDistance: Distance within which lines are drawn between particles.<br>
+strokeStyle: Color of the lines.<br>
+draw: Whether to draw lines.<br>
+lineWidth: Width of the lines.<br>
+opacity: Opacity of the lines.<br>
+
+</details>
+
+---
+##Contributing
 Contributions are welcome! Please submit issues or pull requests via GitHub. For more information on how to contribute, see CONTRIBUTING.md.
 
-License
+##License
 This project is licensed under the MIT License - see the LICENSE file for details.
