@@ -9,12 +9,13 @@ No dependencies
 
 ---
 
-[Installation](##Installation)<br>
-[Usage](##Usage)<br>
-[API](##API)<br>
-[ParticlesFactory](##ParticlesFactory)<br>
-[Particle](##Particle)<br>
-[License](##License)<br>
+[Installation](#installation)<br>
+[Usage](#usage)<br>
+[API](#api)<br>
+[ParticlesFactory](#particlesfactory)<br>
+[Particle](#particle)<br>
+[License](#license)<br>
+
 ---
 
 ##Features
