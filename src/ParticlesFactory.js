@@ -36,7 +36,7 @@ class ParticlesFactory {
 			shape: 'triangle',
 			fillStyle: '#ff0000',
 			randomFill: true,
-			noFill: true,
+			noFill: false,
 			stroke: true,
 			size: 44,
 			randomSize: true,

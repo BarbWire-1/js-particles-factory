@@ -11,17 +11,18 @@ No dependencies
 
 [Installation](#installation)<br>
 [Usage](#usage)<br>
+[Example](#example)<br>
 [API](#api)<br>
 [ParticlesFactory](#particlesfactory)<br>
 [Particle](#particle)<br>
 [License](#license)<br>
 
 ---
-
+![particles-factory-image](factory-img.png)
 ## Features
 
 * Customizable Particles:<br>
-Define shapes (circle, square, rhombus, hexagon, triangle), sizes, and colors.
+Define shapes (circle, square, rhombus, hexagon, triangle), sizes, speed and colors.
 
 * Collision Detection:<br>
 Particles can interact with each other and respond to collisions.
@@ -64,34 +65,50 @@ Create an HTML Canvas Element
 <canvas id="particles-canvas"></canvas>
 ```
 #### Builtin config with default-settings.
-Whether you pass your own config-Object or only pass some changes in an object to the constructor, the defaults get merged with your arguments.
+Whether you pass your own config-Object or only pass some changes in an object to the constructor, the defaults get merged with your arguments.\n
+To create and download your own config please viist the interactive version here:
+
+To create and download your own configuration object you can use this interactive version:
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/ba7818d0-76da-49a3-bd61-e75e9c130101/deploy-status)](https://particles-factory.netlify.app/)
 
 ```js
-{
-  canvas: { id: 'particles-canvas', width: 800, height: 600 },
-  main: {
-    frameRate: 30,
-    numParticles: 100,
-    speed: 0.5,
-    fillStyle: '#000',
-    isFullScreen: true
-  },
-  particles: {
-    shape: 'circle',
-    fillStyle: '#ff0000',
-    randomSize: true,
-    stroke: true,
-    size: 20,
-    opacity: 0.8
-  },
-  lines: {
-    connectDistance: 100,
-    strokeStyle: '#ffffff',
-    draw: true,
-    lineWidth: 1,
-    opacity: 0.5
-  }
-}
+// Default configuration
+	static defaultConfig = {
+		canvas: {
+			id: 'particles-canvas',
+			width: 500,
+			height: 500,
+		},
+		main: {
+			frameRate: 30,
+			numParticles: 80,
+			speed: 0.2,
+			mouseDistance: 80,
+			fillStyle: '#000',
+			isFullScreen: true,
+			isResponsive: true,
+		},
+		particles: {
+			shape: 'triangle',
+			fillStyle: '#ff0000',
+			randomFill: true,
+			noFill: false,
+			stroke: true,
+			size: 44,
+			randomSize: true,
+			draw: true,
+			collision: false,
+			opacity: 1,
+		},
+		lines: {
+			connectDistance: 100,
+			strokeStyle: '#ffffff',
+			draw: true,
+			lineWidth: 0.5,
+			opacity: 1,
+		},
+	};
 
 
 
@@ -111,37 +128,16 @@ Initialisation with eg just another canvasId:<br>
 ```js
 const particles = new ParticlesFactory({canvas:{id: "your-canvas-id"}});
 ```
-Or with a full config-object you can create in the netlify playfile:<br>
-//TODO add another config here and link to netlify
-```js
-const particles = new ParticlesFactory({
-  canvas: { id: 'particles-canvas', width: 800, height: 600 },
-  main: {
-    frameRate: 30,
-    numParticles: 100,
-    speed: 0.5,
-    fillStyle: '#000',
-    isFullScreen: true
-  },
-  particles: {
-    shape: 'circle',
-    fillStyle: '#ff0000',
-    randomSize: true,
-    stroke: true,
-    size: 20,
-    opacity: 0.8
-  },
-  lines: {
-    connectDistance: 100,
-    strokeStyle: '#ffffff',
-    draw: true,
-    lineWidth: 1,
-    opacity: 0.5
-  }
-});
-```
 
-Click [here](https://github.com/BarbWire-1/js-particles-factory-example) to see an example usage
+
+#### Instantiate it with your own full config
+
+
+```js
+const particles = new ParticlesFactory(yourConfigObject);
+```
+## Example
+Click [here](https://github.com/BarbWire-1/js-particles-factory-example) to see an example usage.
 
 ---
 
@@ -157,7 +153,47 @@ new ParticlesFactory(options)
 Configuration object for the particle system.<br>
 The above passed objects shows the defaultSettings.
 
-#### Methods:
+
+
+## Configuration Options
+<details>
+<summary>Click here for detailed description</summary>
+
+* ### Canvas<br>
+  * id: ID of the canvas element.<br>
+  * width: Width of the canvas.<br>
+  * height: Height of the canvas.<br><br>
+* ### Main<br>
+  * frameRate: Animation frame rate.<br>
+  * numParticles: Number of particles to generate.<br>
+  * speed: Base speed of particles.<br>
+  * mouseDistance: Distance within which particles react to the mouse.<br>
+  * fillStyle: Background color of the canvas.<br>
+  * isFullScreen: Toggle fullscreen mode.<br>
+  * isResponsive: Adjust canvas size on window resize.<br>
+
+
+* ### Particles
+  * shape: Shape of the particles.<br>
+  * fillStyle: Base color of particles.<br>
+  * randomFill: Whether particles have random colors.<br>
+  * noFill: Whether particles are transparent.<br>
+  * stroke: Whether particles have a stroke.<br>
+  * size: Base size of particles.<br>
+  * randomSize: Whether particles have random sizes.<br>
+  * draw: Whether to draw particles.<br>
+  * collision: Whether to detect collisions.<br>
+  * opacity: Opacity of particles.<br>
+
+* ### Lines
+  * connectDistance: Distance within which lines are drawn between particles.<br>
+  * strokeStyle: Color of the lines.<br>
+  * draw: Whether to draw lines.<br>
+  * lineWidth: Width of the lines.<br>
+  * opacity: Opacity of the lines.<br>
+</details>
+
+## Methods:
 
   * setFillMode(mode)<br>
 Set the fill mode for particles.<br>
@@ -216,39 +252,6 @@ Update the particle’s speed (on collision).
 handleMouseMove(event, mouseDistance, canvasX, canvasY)<br>
 Handle the particle's behavior when the mouse moves nearby.
 
-## Configuration Options
-#### Canvas
-id: ID of the canvas element.<br>
-width: Width of the canvas.<br>
-height: Height of the canvas.<br>
-####Main
-frameRate: Animation frame rate.<br>
-numParticles: Number of particles to generate.<br>
-speed: Base speed of particles.<br>
-mouseDistance: Distance within which particles react to the mouse.<br>
-fillStyle: Background color of the canvas.<br>
-isFullScreen: Toggle fullscreen mode.<br>
-isResponsive: Adjust canvas size on window resize.<br>
-
-
-#### Particles
-shape: Shape of the particles.<br>
-fillStyle: Base color of particles.<br>
-randomFill: Whether particles have random colors.<br>
-noFill: Whether particles are transparent.<br>
-stroke: Whether particles have a stroke.<br>
-size: Base size of particles.<br>
-randomSize: Whether particles have random sizes.<br>
-draw: Whether to draw particles.<br>
-collision: Whether to detect collisions.<br>
-opacity: Opacity of particles.<br>
-
-#### Lines
-connectDistance: Distance within which lines are drawn between particles.<br>
-strokeStyle: Color of the lines.<br>
-draw: Whether to draw lines.<br>
-lineWidth: Width of the lines.<br>
-opacity: Opacity of the lines.<br>
 
 </details>
 
@@ -258,3 +261,4 @@ Contributions are welcome! Please submit issues or pull requests via GitHub. For
 
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details.
+
