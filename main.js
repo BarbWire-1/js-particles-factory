@@ -30,12 +30,14 @@ function rotateImages() {
 		'smiley': 'yellow',
 		'sunflower': 'limegreen',
 		'snowflake': 'lightblue',
-		'ghosty': 'orange'
+		'smiley2': 'red',
+		'ghosty': 'orange',
+		'tongue': 'white'
 	};
 
 	const names = Object.keys(rotations);
 	let i = 0;
-
+	const num = names.length;
 	function updateImageAndColor() {
 		const name = names[ i ];
 		const newImageSrc = `assets/images/${name}.png`;
@@ -44,7 +46,7 @@ function rotateImages() {
 		test.setImageSrc(newImageSrc);
 		test.lines.strokeStyle = newColor;
 
-		i = (i + 1) % names.length;
+		i = (i + 1) % num;
 	}
 
 
@@ -54,7 +56,7 @@ function rotateImages() {
 	setTimeout(() => {
 		clearInterval(imageSwitchInterval);
 		console.log("stopped img rotation");
-	}, 40000);
+	}, 5000* num);
 }
 
 rotateImages();
