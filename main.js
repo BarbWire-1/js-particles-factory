@@ -32,7 +32,8 @@ function rotateImages() {
 		'snowflake': 'lightblue',
 		'smiley2': 'red',
 		'ghosty': 'orange',
-		'tongue': 'white'
+		'tongue': 'white',
+		'monster': 'pink'
 	};
 
 	const names = Object.keys(rotations);
