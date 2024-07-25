@@ -1,11 +1,5 @@
 import { Particle } from './Particle.js';
 
-// TODO add setters for those properties which need special handling
-// so easier to just set props.
-// TODO create new clean repo - bundle with vite
-// TODO create npm module
-// TODO include min.js in repo
-
 //console.time('factory')
 class ParticlesFactory {
 	#ctx;
@@ -53,14 +47,14 @@ class ParticlesFactory {
 		},
 	};
 
-	constructor (options = {canvas: {id: 'particles-canvas'}}) {
+	constructor (options = { canvas: { id: 'particles-canvas' } }) {
 		const defaults = ParticlesFactory.defaultConfig
 		// Merge passed options with the default config
 		for (const key in defaults) {
 			Object.preventExtensions(
-				(this[key] = {
-					...defaults[key],
-					...options[key],
+				(this[ key ] = {
+					...defaults[ key ],
+					...options[ key ],
 				})
 			);
 		}
@@ -68,7 +62,7 @@ class ParticlesFactory {
 			throw new Error(
 				'To instantiate with the default settings you need at least to pass the canvas id like myParticles = new ParticlesFactory(canvas:{id: <your-canvas-id})'
 			)
-	}
+		}
 
 		if (!this.particles.draw && !this.lines.draw) {
 			throw new Error(
@@ -77,16 +71,16 @@ class ParticlesFactory {
 		}
 
 		this.#particlesObjects = []; // holding all active particles' data
-		this.#originalBaseSize = this.particles?.size || 2; // Store the original base size
+		this.#originalBaseSize = this.particles?.size || 2; // store the original base size
 
-		this.#throttledUpdate = this.#throttle(this.#updateCanvas); // Throttle to custom frameRate
+		this.#throttledUpdate = this.#throttle(this.#updateCanvas); // throttle to custom frameRate
 
 		// -----------------------------------------------------------INITIALISATION
 		this.#setupCanvas();
 		this.#initListeners();
 		this.#createParticles();
-        this.#startAnimation();
-//TODO adjust for !isFullScreen
+		this.#startAnimation();
+
 
 	}
 
@@ -99,19 +93,19 @@ class ParticlesFactory {
 		this.getCanvasSize();
 	}
 
-    #initListeners() {
-        //console.log(this.canvasEl.getBoundingClientRect());
-        const {x,y} = this.canvasEl.getBoundingClientRect()
+	#initListeners() {
+
+		const { x, y } = this.canvasEl.getBoundingClientRect()
 		this.canvasEl.addEventListener('pointermove', (event) => {
 			this.#particlesObjects.forEach((particle) => {
-				particle.handleMouseMove(event, this.main.mouseDistance, x,y);
+				particle.handleMouseMove(event, this.main.mouseDistance, x, y);
 			});
 		});
 
 		window.addEventListener('resize', () => {
 			if (!this.main.isFullScreen) return;
 			this.getCanvasSize();
-            this.#updateCanvas(); // call update to bypass throttling
+			this.#updateCanvas(); // call update to bypass throttling
 
 		});
 	}
@@ -134,7 +128,7 @@ class ParticlesFactory {
 	#calculateDistance(x1, y1, x2, y2) {
 		const a = x2 - x1;
 		const b = y2 - y1;
-		const c = Math.sqrt(a ** 2 + b ** 2); // ;)
+		const c = Math.sqrt(a ** 2 + b ** 2);
 		return c;
 	}
 
@@ -157,23 +151,16 @@ class ParticlesFactory {
 		if (this.main.isResponsive) {
 			this.#updatePosOnResize(width, height, prevDimensions);
 		}
-		//console.log('resizing')
+
 	};
 
 	// get the canvas size depending on flags and device-dimensions
-	// need to use available(!) screen for mobiles
 	#calculateCanvasSize() {
 		const { innerWidth, innerHeight } = window;
-		// const { availWidth, availHeight } = screen;
-		// const isMobile = innerWidth < 750;
-
 		const isFullScreen = this.main.isFullScreen;
 
-		// const sWidth = isMobile ? availWidth : innerWidth;
-		// const sHeight = isMobile ? availHeight : innerHeight;
-
-        const sWidth = innerWidth;
-        const sHeight = innerHeight;
+		const sWidth = innerWidth;
+		const sHeight = innerHeight;
 		const width = isFullScreen ? sWidth : this.canvas.width;
 		const height = isFullScreen ? sHeight : this.canvas.height;
 
@@ -192,7 +179,7 @@ class ParticlesFactory {
 
 	// -------------------------------------------------------------------PARTICLES
 	#createParticle() {
-		// Generate individual properties for a single particle based on configuration
+		// generate individual properties for a single particle based on configuration
 		const { width, height } = this.#offscreenCanvas;
 		const { size, randomSize, fillStyle, randomFill, shape, draw } =
 			this.particles;
@@ -264,17 +251,17 @@ class ParticlesFactory {
 				let adjustedFillStyle = noFill
 					? 'transparent'
 					: randomFill
-					? particle.fillStyle
-					: fillStyle; // default
+						? particle.fillStyle
+						: fillStyle; // default
 
-                particle.drawParticle(
+				particle.drawParticle(
 					adjustedFillStyle,
 					opacity,
 					randomSize ? particle.size : size,
 					shape,
 					strokeStyle
 				);
-            }
+			}
 
 		});
 
@@ -286,8 +273,7 @@ class ParticlesFactory {
 
 	#drawLine(ctx, particle, otherParticle, distance) {
 		if (!particle || !otherParticle || !this.lines?.draw) return;
-		//console.log(particle.x, particle.y);
-		// destructure used objects
+
 		const { strokeStyle, lineWidth, opacity, connectDistance } = this.lines;
 		const isCloseEnough = distance <= connectDistance;
 
@@ -295,8 +281,6 @@ class ParticlesFactory {
 		if (isCloseEnough) {
 			const { x: x1, y: y1 } = particle;
 			const { x: x2, y: y2 } = otherParticle;
-
-			//console.log(x1, y1, x2, y2);
 
 			ctx.beginPath();
 			ctx.moveTo(x1, y1);
@@ -338,9 +322,8 @@ class ParticlesFactory {
 	}
 
 	// update instead of recreate by getting the difference old/new
-	// create and add or remove
-    setNumParticles(newValue) {
-        newValue = Math.round(newValue);
+	setNumParticles(newValue) {
+		newValue = Math.round(newValue);
 		const currentCount = this.#particlesObjects.length;
 		let difference = newValue - currentCount;
 
@@ -372,8 +355,8 @@ class ParticlesFactory {
 	}
 
 	// update randomSize relative on each particle IF randomSize
-    setBaseSize(newBaseSize) {
-        newBaseSize = Math.round(newBaseSize);
+	setBaseSize(newBaseSize) {
+		newBaseSize = Math.round(newBaseSize);
 		const scaleFactor = newBaseSize / this.#originalBaseSize;
 
 		this.#particlesObjects.forEach((particle) => {
@@ -391,7 +374,7 @@ class ParticlesFactory {
 	// check for flags and recalculate/draw in case
 	#handleLinesAndCollision(particle, startIndex, len) {
 		for (let j = startIndex + 1; j < len; j++) {
-			const otherParticle = this.#particlesObjects[j];
+			const otherParticle = this.#particlesObjects[ j ];
 			const distance = this.#getDistance(particle, otherParticle);
 
 			const { randomSize: isRandomSize, size: commonSize } = this.particles;
@@ -434,8 +417,7 @@ class ParticlesFactory {
 		};
 	}
 	#startAnimation() {
-		// this.#particlesObjects.forEach(p => p.updateCoords())
-		//this.#updateCanvas();
+
 		this.#throttledUpdate();
 		this.#animationId = requestAnimationFrame(
 			this.#startAnimation.bind(this)
@@ -454,39 +436,6 @@ class ParticlesFactory {
 			this.#startAnimation();
 		}
 	}
-
-/*
-
-// ONLY IN EXAMPLE TO GET CURRENT STATE FOR CONFIG
-	async savePropsStatus2File() {
-		const properties = Object.keys(this).filter(
-			(key) =>
-				typeof this[key] !== 'function' && this[key] !== this.canvasEl
-		);
-
-		const propertyValues = properties.map((key) => {
-			const value = this[key];
-			const obj = `${JSON.stringify(key)}: ${JSON.stringify(
-				value,
-				null,
-				4
-			).replace(/\n/g, '\n    ')}`; // string representation of the property and its value
-
-			return obj;
-		});
-
-		const propertiesText = `${propertyValues.join(',\n    ')}`;
-
-		const finalJson = `{\n    ${propertiesText}\n}`;
-
-		const blob = new Blob([finalJson], { type: 'application/json' });
-		const url = URL.createObjectURL(blob);
-		const link = document.createElement('a');
-		link.href = url;
-		link.download = 'particles-factory-config.json';
-		link.click();
-	}
-	*/
 }
 
 // Export for ES module usage
