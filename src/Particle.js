@@ -1,5 +1,5 @@
 export class Particle {
-	constructor (canvas, x, y, size, speed, fillStyle) {
+	constructor (canvas, x, y, size, speed, fillStyle, imageSrc = null) {
 		this.canvas = canvas;
 		this.ctx = this.canvas.getContext('2d');
 		this.x = x;
@@ -7,14 +7,30 @@ export class Particle {
 		this.size = size;
 		this.speed = speed;
 		this.fillStyle = fillStyle;
+		this.imageSrc = imageSrc;
+
+		if (imageSrc) {
+			console.log(imageSrc)
+			this.loadImage(imageSrc); // Load the image if provided
+		}
 
 		this.updateSpeed(speed);
+	}
+
+	// Load an image and store it in the particle
+	loadImage(src) {
+		this.image = new Image();
+		this.image.src = src;
+		console.log(this.image.src)// NOTHING
+		this.image.onload = () => {
+			this.imageLoaded = true; // Mark image as loaded
+		};
+		this.imageLoaded = false; // Initially, image is not loaded
 	}
 
 	drawParticle(fillColor, opacity, size, shape, strokeStyle) {
 		const ctx = this.ctx;
 		strokeStyle && (ctx.strokeStyle = strokeStyle);
-		ctx.fillStyle = fillColor;
 		ctx.globalAlpha = opacity;
 		ctx.beginPath();
 
@@ -34,6 +50,12 @@ export class Particle {
 			case 'triangle':
 				this.createPolygon(ctx, size, 3, -Math.PI / 2, 1, 'triangle');
 				break;
+			case 'image':
+				if (this.imageLoaded && this.image) {
+					console.log('should draw image')
+					this.drawImage(ctx, size);
+				}
+				break;
 			default:
 				break;
 		}
@@ -45,14 +67,24 @@ export class Particle {
 		}
 	}
 
+	drawImage(ctx, size) {
+		if (!this.image) return;
+
+		// Draw the image centered at the particle's position
+		ctx.drawImage(
+			this.image,
+			this.x - size / 2, // x position
+			this.y - size / 2, // y position
+			size, // width
+			size  // height
+		);
+	}
+
 	createCircle(ctx, size) {
-
 		ctx.arc(this.x, this.y, size / 2, 0, Math.PI * 2);
-
 	}
 
 	createPolygon(ctx, size, sides, rotate, squeeze) {
-
 		const angle = (Math.PI * 2) / sides;
 		const radius = size / 2;
 
@@ -69,15 +101,12 @@ export class Particle {
 		}
 
 		ctx.closePath();
-
 	}
 
-	// flag - particle drawn or not
 	keepInBoundaries(drawParticles) {
 		let { x, y, size } = this;
 		const { width, height } = this.canvas;
 
-		// adjust to correct prev translating of particles to center when drawn or to 0 if not
 		drawParticles ? (size /= 2) : (size = 0);
 		if (x <= size || x >= width - size) {
 			this.x = x <= size ? size : width - size;
@@ -90,7 +119,6 @@ export class Particle {
 		}
 	}
 
-
 	particlesCollision(isRandomSize, commonSize, particle, otherParticle, distance) {
 		const dist = isRandomSize ? particle.size + otherParticle.size : 2 * commonSize;
 
@@ -98,7 +126,6 @@ export class Particle {
 			[ particle, otherParticle ].forEach(p => {
 				for (let speed of [ 'xSpeed', 'ySpeed' ]) {
 					p[ speed ] *= (p[ speed ] >= 6 ? -0.01 : -1.001);
-
 				}
 			});
 		}
@@ -112,12 +139,10 @@ export class Particle {
 	}
 
 	updateSpeed(speed) {
-		// randomise speed and direction
 		this.xSpeed = speed * (Math.random() * 2 - 1);
 		this.ySpeed = speed * (Math.random() * 2 - 1);
 	}
 
-	// Inside Particle class
 	handleMouseMove(event, mouseDistance, canvasX, canvasY) {
 		if (!+mouseDistance) return;
 		const mouseX = event.clientX;
@@ -139,4 +164,3 @@ export class Particle {
 		}
 	}
 }
-//console.timeEnd('particle')

@@ -27,7 +27,7 @@ class ParticlesFactory {
 			isResponsive: true,
 		},
 		particles: {
-			shape: 'triangle',
+			shape: 'triangle', // default shape
 			fillStyle: '#ff0000',
 			randomFill: true,
 			noFill: false,
@@ -37,6 +37,7 @@ class ParticlesFactory {
 			draw: true,
 			collision: false,
 			opacity: 1,
+			imageSrc: null, // Add imageSrc to the default config
 		},
 		lines: {
 			connectDistance: 100,
@@ -48,7 +49,7 @@ class ParticlesFactory {
 	};
 
 	constructor (options = { canvas: { id: 'particles-canvas' } }) {
-		const defaults = ParticlesFactory.defaultConfig
+		const defaults = ParticlesFactory.defaultConfig;
 		// Merge passed options with the default config
 		for (const key in defaults) {
 			Object.preventExtensions(
@@ -58,11 +59,7 @@ class ParticlesFactory {
 				})
 			);
 		}
-		if (!this.canvas) {
-			throw new Error(
-				'To instantiate with the default settings you need at least to pass the canvas id like myParticles = new ParticlesFactory(canvas:{id: <your-canvas-id})'
-			)
-		}
+
 
 		if (!this.particles.draw && !this.lines.draw) {
 			throw new Error(
@@ -80,8 +77,6 @@ class ParticlesFactory {
 		this.#initListeners();
 		this.#createParticles();
 		this.#startAnimation();
-
-
 	}
 
 	#setupCanvas() {
@@ -94,8 +89,7 @@ class ParticlesFactory {
 	}
 
 	#initListeners() {
-
-		const { x, y } = this.canvasEl.getBoundingClientRect()
+		const { x, y } = this.canvasEl.getBoundingClientRect();
 		this.canvasEl.addEventListener('pointermove', (event) => {
 			this.#particlesObjects.forEach((particle) => {
 				particle.handleMouseMove(event, this.main.mouseDistance, x, y);
@@ -106,7 +100,6 @@ class ParticlesFactory {
 			if (!this.main.isFullScreen) return;
 			this.getCanvasSize();
 			this.#updateCanvas(); // call update to bypass throttling
-
 		});
 	}
 
@@ -115,12 +108,14 @@ class ParticlesFactory {
 		let number = (Math.random() * 0xffffff) >> 0;
 		return '#' + number.toString(16).padStart(6, '0');
 	}
+
 	#randomCoords(width, height, size) {
 		return {
 			x: Math.random() * (width - size / 2),
 			y: Math.random() * (height - size / 2),
 		};
 	}
+
 	#randomSize(size) {
 		return size * Math.max(0.2, Math.random());
 	}
@@ -151,7 +146,6 @@ class ParticlesFactory {
 		if (this.main.isResponsive) {
 			this.#updatePosOnResize(width, height, prevDimensions);
 		}
-
 	};
 
 	// get the canvas size depending on flags and device-dimensions
@@ -181,8 +175,8 @@ class ParticlesFactory {
 	#createParticle() {
 		// generate individual properties for a single particle based on configuration
 		const { width, height } = this.#offscreenCanvas;
-		const { size, randomSize, fillStyle, randomFill, shape, draw } =
-			this.particles;
+		const { size, randomSize, fillStyle, randomFill, shape, draw, imageSrc } = this.particles;
+		console.log(this.particles)
 
 		let adjustedFill = fillStyle;
 		let adjustedSize = size;
@@ -192,6 +186,7 @@ class ParticlesFactory {
 		}
 		const { x, y } = this.#randomCoords(width, height, size);
 
+		// Pass imageSrc if shape is 'image'
 		const particle = new Particle(
 			this.#offscreenCanvas,
 			x,
@@ -199,7 +194,7 @@ class ParticlesFactory {
 			adjustedSize,
 			this.main.speed,
 			adjustedFill,
-			shape
+			shape === 'image' ? imageSrc : null
 		);
 
 		return particle;
@@ -229,6 +224,7 @@ class ParticlesFactory {
 			randomSize,
 			size,
 			shape,
+			imageSrc
 		} = this.particles;
 
 		const strokeStyle = stroke ? this.lines.strokeStyle : undefined;
@@ -237,7 +233,6 @@ class ParticlesFactory {
 		// draw background rectangle
 		ctx.fillStyle = this.main.fillStyle;
 		ctx.globalAlpha = 1;
-
 		ctx.fillRect(0, 0, this.canvasEl.width, this.canvasEl.height);
 
 		//UGLY to loop twice here, but need to update ALL coords first to guarantee updated coords for otherParticle > i
@@ -262,11 +257,11 @@ class ParticlesFactory {
 					strokeStyle
 				);
 			}
-
 		});
 
 		this.#renderOffscreenCanvas();
 	}
+
 	#renderOffscreenCanvas() {
 		this.#ctx.drawImage(this.#offscreenCanvas, 0, 0);
 	}
@@ -294,16 +289,14 @@ class ParticlesFactory {
 
 	//-------------------------------------------------------------------UPDATES
 	setFillMode(mode) {
-
 		if (mode === "noFill") {
 			this.particles.noFill = true;
 			this.#particlesObjects.forEach(
 				(p) => (p.fillStyle = "transparent")
 			);
 		} else {
-			this.particles.noFill = false
-			if (mode === "random")
-				this.particles.randomFill = true;
+			this.particles.noFill = false;
+			if (mode === "random") this.particles.randomFill = true;
 			if (mode === "fill") {
 				this.particles.randomFill = true;
 				this.#particlesObjects.forEach(
@@ -364,6 +357,7 @@ class ParticlesFactory {
 		});
 		this.#originalBaseSize = newBaseSize;
 	}
+
 	toggleFullScreen() {
 		this.main.isFullScreen = !this.main.isFullScreen;
 		this.getCanvasSize();
@@ -416,8 +410,8 @@ class ParticlesFactory {
 			}
 		};
 	}
-	#startAnimation() {
 
+	#startAnimation() {
 		this.#throttledUpdate();
 		this.#animationId = requestAnimationFrame(
 			this.#startAnimation.bind(this)
