@@ -11,7 +11,7 @@ No dependencies
 
 [Installation](#installation)<br>
 [Usage](#usage)<br>
-[Example](#example)<br>
+[Example for a simple usage](https://github.com/BarbWire-1/js-particles-factory-example)<br>
 [API](#api)<br>
 [ParticlesFactory](#particlesfactory)<br>
 [Particle](#particle)<br>
@@ -43,17 +43,16 @@ Start, stop, and adjust particle animation settings.
 ## Installation
 You can install js-particles-factory via npm:
 
-```js
+```
 npm install js-particles-factory
 ```
-Alternatively, include it directly in your HTML with a script tag:
+Alternatively, include it directly in your HTML head with a script tag:
 ```
-<script type="module">
-  import { ParticlesFactory } from 'https://unpkg.com/js-particles-factory@1.0.2/dist/particles-factory.es.js';
-</script>
+<script type="module" src="https://cdn.jsdelivr.net/gh/BarbWire-1/js-particles-factory/minified/particles-factory.es.js"></script>
+
 ```
 or copy the [particle.factory.es.js](./minified/particles-factory.es.js) into your project and import **ParticlesFactory** directly.<br>
-(CDN will follow)
+
 
 ---
 ## Usage
@@ -66,7 +65,7 @@ Create an HTML Canvas Element
 ```
 ### Builtin config with default-settings
 Whether you pass your own config-Object or only pass some changes in an object to the constructor, the defaults get merged with your arguments.<br>
-To create and download your own config please viist the interactive version here:
+
 
 
 ```js
@@ -127,7 +126,7 @@ const particles = new ParticlesFactory({canvas:{id: "your-canvas-id"}});
 ```
 
 
-#### Instantiate it with your own full config
+## Instantiate it with your own full config
 To **create and download your own configuration object** you can use this interactive version:
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/ba7818d0-76da-49a3-bd61-e75e9c130101/deploy-status)](https://particles-factory.netlify.app/)
@@ -135,8 +134,6 @@ To **create and download your own configuration object** you can use this intera
 ```js
 const particles = new ParticlesFactory(yourConfigObject);
 ```
-## Example
-Click [here](https://github.com/BarbWire-1/js-particles-factory-example) to see an example usage.
 
 ---
 

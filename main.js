@@ -1,4 +1,4 @@
-import { ParticlesFactory } from './src/ParticlesFactory.js';
+//import { ParticlesFactory } from './src/ParticlesFactory.js';
 const test = new ParticlesFactory({
 	particles: {
 		shape: 'image',
@@ -52,7 +52,7 @@ function rotateImages() {
 		clearInterval(imageSwitchInterval);
 		console.log("stopped img rotation");
 	}, 5000 * num - 1);
-	
+
 	updateImageAndColor();
 }
 
