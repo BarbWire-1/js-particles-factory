@@ -3,10 +3,12 @@ const test = new ParticlesFactory({
 	particles: {
 		shape: 'image',
 		imageSrc: "assets/images/sunflower.png",
+		opacity: 1
 	},
 	lines: {
-		strokeStyle: "limegreen",
-		lineWidth: 1
+		strokeStyle: "white",
+		lineWidth: .5,
+		opacity: 1
 
 	}
 });
@@ -23,22 +25,35 @@ let i = 0;
 let imageSwitchInterval;
 
 function rotateImages() {
-	const imageSources = [
-		"assets/images/smiley.png",
-		"assets/images/sunflower.png",
-		"assets/images/snowFlake.png"
-	];
+	const rotations = {
+		'smiley': 'yellow',
+		'sunflower': 'limegreen',
+		'snowflake': 'lightblue',
+		'ghosty': 'orange'
+	};
 
-	imageSwitchInterval = setInterval(() => {
-		const newImageSrc = imageSources[ i++ % imageSources.length ];
+	const names = Object.keys(rotations);
+	let i = 0;
+
+	function updateImageAndColor() {
+		const name = names[ i ];
+		const newImageSrc = `assets/images/${name}.png`;
+		const newColor = rotations[ name ];
+
 		test.setImageSrc(newImageSrc);
-	}, 5000);
+		test.lines.strokeStyle = newColor;
 
+		i = (i + 1) % names.length;
+	}
+
+
+
+	const imageSwitchInterval = setInterval(updateImageAndColor, 5000);
 
 	setTimeout(() => {
 		clearInterval(imageSwitchInterval);
 		console.log("stopped img rotation");
-	}, 35000);
+	}, 40000);
 }
 
 rotateImages();
