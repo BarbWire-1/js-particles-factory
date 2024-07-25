@@ -2,7 +2,16 @@ import { ParticlesFactory } from './src/ParticlesFactory.js';
 const test = new ParticlesFactory({
 	particles: {
 		shape: 'image',
-		imageSrc: "./public/assets/images/sunflower.png"
+		imageSrc: "assets/images/smiley.png",
+		//randomSize: false
 	}
 });
-test.particles.imageSrc = "./public/assets/images/sunflower.png"
+//TODO not updating on runtime
+
+// hmmmm not updating on runtime...look where it sticks
+// TODO load the image once in factory and pass it the particleInstances in draw
+test.particles.imageSrc = ".public/assets/images/sunflower.png"
+//test.particles.imageSrc = "assets/images/smiley.png"
+
+// BUT can switch
+//test.particles.shape = 'triangle'

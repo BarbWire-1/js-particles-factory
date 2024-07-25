@@ -10,7 +10,7 @@ export class Particle {
 		this.imageSrc = imageSrc;
 
 		if (imageSrc) {
-			console.log(imageSrc)
+
 			this.loadImage(imageSrc); // Load the image if provided
 		}
 
@@ -21,7 +21,7 @@ export class Particle {
 	loadImage(src) {
 		this.image = new Image();
 		this.image.src = src;
-		console.log(this.image.src)// NOTHING
+
 		this.image.onload = () => {
 			this.imageLoaded = true; // Mark image as loaded
 		};

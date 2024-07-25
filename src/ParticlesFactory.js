@@ -176,7 +176,7 @@ class ParticlesFactory {
 		// generate individual properties for a single particle based on configuration
 		const { width, height } = this.#offscreenCanvas;
 		const { size, randomSize, fillStyle, randomFill, shape, draw, imageSrc } = this.particles;
-		console.log(this.particles)
+
 
 		let adjustedFill = fillStyle;
 		let adjustedSize = size;
@@ -254,7 +254,8 @@ class ParticlesFactory {
 					opacity,
 					randomSize ? particle.size : size,
 					shape,
-					strokeStyle
+					strokeStyle,
+					imageSrc
 				);
 			}
 		});
