@@ -3,7 +3,8 @@ const test = new ParticlesFactory({
 	particles: {
 		shape: 'image',
 		imageSrc: "assets/images/sunflower.png",
-		opacity: 1
+		opacity: 1,
+		size: 80
 	},
 	lines: {
 		strokeStyle: "white",
