@@ -113,6 +113,11 @@ const k = class k {
     let s = t - i;
     t && s && s > 0 ? r(this, e, Q).call(this, s) : r(this, e, U).call(this, i, -s), this.main.numParticles = i + s;
   }
+  setImageSrc(t) {
+    this.particles.imageSrc = t, l(this, m).forEach((i) => {
+      i.loadImage(t);
+    });
+  }
   setBaseSize(t) {
     const i = (t = Math.round(t)) / l(this, M);
     l(this, m).forEach((s) => {
@@ -166,7 +171,7 @@ P = new WeakMap(), m = new WeakMap(), v = new WeakMap(), y = new WeakMap(), E = 
   C.fillStyle = this.main.fillStyle, C.globalAlpha = 1, C.fillRect(0, 0, this.canvasEl.width, this.canvasEl.height), l(this, m).forEach((x) => x.updateCoords(this.particles.draw)), l(this, m).forEach((x, tt) => {
     if ((this.lines.draw && +this.lines.connectDistance || s) && r(this, e, Z).call(this, x, tt, t), i) {
       let it = n ? "transparent" : a ? x.fillStyle : h;
-      x.drawParticle(it, d, g ? x.size : p, u, z);
+      x.drawParticle(it, d, g ? x.size : p, u, z, w);
     }
   }), r(this, e, J).call(this);
 }, J = function() {

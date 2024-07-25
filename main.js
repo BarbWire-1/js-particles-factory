@@ -2,8 +2,12 @@ import { ParticlesFactory } from './src/ParticlesFactory.js';
 const test = new ParticlesFactory({
 	particles: {
 		shape: 'image',
-		imageSrc: "assets/images/smiley.png",
-		//randomSize: false
+		imageSrc: "assets/images/sunflower.png",
+	},
+	lines: {
+		strokeStyle: "limegreen",
+		lineWidth: 1
+
 	}
 });
 
