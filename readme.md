@@ -46,6 +46,7 @@ You can install js-particles-factory via npm:
 ```
 npm install js-particles-factory
 ```
+(includes a *es.js gzip 3.5kb and a *umd.js gzip 3.26kb)
 Alternatively, include it directly in your HTML head with a script tag:
 ```
 <script type="module" src="https://cdn.jsdelivr.net/gh/BarbWire-1/js-particles-factory/minified/particles-factory.es.js"></script>
