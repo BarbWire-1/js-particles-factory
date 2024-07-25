@@ -32,7 +32,7 @@ function rotateImages() {
 	const num = names.length;
 	function updateImageAndColor() {
 		const name = names[ i ];
-		const newImageSrc = `public/assets/images/${name}.png`;
+		const newImageSrc = `assets/images/${name}.png`;
 		const newColor = rotations[ name ];
 
 		test.setImageSrc(newImageSrc);
