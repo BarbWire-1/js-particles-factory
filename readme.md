@@ -64,13 +64,10 @@ Create an HTML Canvas Element
 ```
 <canvas id="particles-canvas"></canvas>
 ```
-### Builtin config with default-settings.
-Whether you pass your own config-Object or only pass some changes in an object to the constructor, the defaults get merged with your arguments.\n
+### Builtin config with default-settings
+Whether you pass your own config-Object or only pass some changes in an object to the constructor, the defaults get merged with your arguments.<br>
 To create and download your own config please viist the interactive version here:
 
-To **create and download your own configuration object** you can use this interactive version:
-
-[![Netlify Status](https://api.netlify.com/api/v1/badges/ba7818d0-76da-49a3-bd61-e75e9c130101/deploy-status)](https://particles-factory.netlify.app/)
 
 ```js
 // Default configuration
@@ -131,7 +128,9 @@ const particles = new ParticlesFactory({canvas:{id: "your-canvas-id"}});
 
 
 #### Instantiate it with your own full config
+To **create and download your own configuration object** you can use this interactive version:
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/ba7818d0-76da-49a3-bd61-e75e9c130101/deploy-status)](https://particles-factory.netlify.app/)
 
 ```js
 const particles = new ParticlesFactory(yourConfigObject);
