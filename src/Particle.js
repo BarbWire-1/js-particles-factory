@@ -18,14 +18,15 @@ export class Particle {
 	}
 
 	// Load an image and store it in the particle
+	// TODO move this to factory and then pass
 	loadImage(src) {
 		this.image = new Image();
 		this.image.src = src;
 
 		this.image.onload = () => {
-			this.imageLoaded = true; // Mark image as loaded
+			this.imageLoaded = true;
 		};
-		this.imageLoaded = false; // Initially, image is not loaded
+		this.imageLoaded = false;
 	}
 
 	drawParticle(fillColor, opacity, size, shape, strokeStyle) {

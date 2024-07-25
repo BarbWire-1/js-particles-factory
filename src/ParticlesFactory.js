@@ -328,6 +328,16 @@ class ParticlesFactory {
 		this.main.numParticles = currentCount + difference;
 	}
 
+	// this works, but is not nice why loading img x times?
+	setImageSrc(newValue) {
+		this.particles.imageSrc = newValue
+		this.#particlesObjects.forEach((p) => {
+
+			p.loadImage(newValue)
+
+		});
+	}
+
 	#addParticles(difference) {
 		this.#createParticles(difference);
 	}

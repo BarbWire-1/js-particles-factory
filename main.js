@@ -11,7 +11,7 @@ const test = new ParticlesFactory({
 // hmmmm not updating on runtime...look where it sticks
 // TODO load the image once in factory and pass it the particleInstances in draw
 test.particles.imageSrc = ".public/assets/images/sunflower.png"
-//test.particles.imageSrc = "assets/images/smiley.png"
+test.setImageSrc("assets/images/sunflower.png")
 
 // BUT can switch
 //test.particles.shape = 'triangle'
