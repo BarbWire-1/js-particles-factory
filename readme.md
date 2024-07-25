@@ -58,17 +58,17 @@ or copy the [particle.factory.es.js](./minified/particles-factory.es.js) into yo
 ---
 ## Usage
 
-Basic Setup
+### Basic Setup<br>
 Create an HTML Canvas Element
 
 ```
 <canvas id="particles-canvas"></canvas>
 ```
-#### Builtin config with default-settings.
+### Builtin config with default-settings.
 Whether you pass your own config-Object or only pass some changes in an object to the constructor, the defaults get merged with your arguments.\n
 To create and download your own config please viist the interactive version here:
 
-To create and download your own configuration object you can use this interactive version:
+To **create and download your own configuration object** you can use this interactive version:
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/ba7818d0-76da-49a3-bd61-e75e9c130101/deploy-status)](https://particles-factory.netlify.app/)
 
@@ -261,4 +261,3 @@ Contributions are welcome! Please submit issues or pull requests via GitHub. For
 
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details.
-
