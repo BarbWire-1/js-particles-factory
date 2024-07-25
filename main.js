@@ -1,4 +1,4 @@
-//import { ParticlesFactory } from './src/ParticlesFactory.js';
+import { ParticlesFactory } from './src/ParticlesFactory.js';
 const test = new ParticlesFactory({
 	particles: {
 		shape: 'image',
@@ -12,12 +12,7 @@ const test = new ParticlesFactory({
 
 	}
 });
-
-// TODO load the image once in factory and pass it the particleInstances in draw
-
-// BUT can switch
-//test.particles.shape = 'triangle'
-
+// TESTING IMAGES
 let i = 0;
 let imageSwitchInterval;
 
@@ -37,7 +32,7 @@ function rotateImages() {
 	const num = names.length;
 	function updateImageAndColor() {
 		const name = names[ i ];
-		const newImageSrc = `assets/images/${name}.png`;
+		const newImageSrc = `public/assets/images/${name}.png`;
 		const newColor = rotations[ name ];
 
 		test.setImageSrc(newImageSrc);

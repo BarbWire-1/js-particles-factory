@@ -72,7 +72,7 @@ class ParticlesFactory {
 
 		this.#throttledUpdate = this.#throttle(this.#updateCanvas); // throttle to custom frameRate
 
-		// -----------------------------------------------------------INITIALISATION
+		// INITIALISATION
 		this.#setupCanvas();
 		this.#initListeners();
 		this.#createParticles();
@@ -103,7 +103,7 @@ class ParticlesFactory {
 		});
 	}
 
-	// -----------------------------------------------------------------------HELPERS
+	// HELPERS
 	#randomHex() {
 		let number = (Math.random() * 0xffffff) >> 0;
 		return '#' + number.toString(16).padStart(6, '0');
@@ -137,7 +137,7 @@ class ParticlesFactory {
 		);
 	}
 
-	//------------------------------------------------------------------------------CANVASSIZE
+	// CANVASSIZE
 	// update particles coords in relation to screen dimensions
 	getCanvasSize = () => {
 		const { width, height, prevDimensions } = this.#calculateCanvasSize();
@@ -171,7 +171,7 @@ class ParticlesFactory {
 		this.#offscreenCanvas.height = this.canvasEl.height = height;
 	}
 
-	// -------------------------------------------------------------------PARTICLES
+	// PARTICLES
 	#createParticle() {
 		// generate individual properties for a single particle based on configuration
 		const { width, height } = this.#offscreenCanvas;
@@ -186,7 +186,7 @@ class ParticlesFactory {
 		}
 		const { x, y } = this.#randomCoords(width, height, size);
 
-		// Pass imageSrc if shape is 'image'
+		// Pass imageSrc if shape is 'image' - TODO pass image instead?
 		const particle = new Particle(
 			this.#offscreenCanvas,
 			x,
@@ -207,8 +207,7 @@ class ParticlesFactory {
 		}
 	}
 
-	// -----------------------------------------------------------------DRAWING
-	// drawing
+	// DRAWING
 	// not nice, but keeps all operations on particles in one loop
 	#updateCanvas() {
 		const len = this.main.numParticles;
@@ -288,7 +287,7 @@ class ParticlesFactory {
 		}
 	}
 
-	//-------------------------------------------------------------------UPDATES
+	// UPDATES
 	setFillMode(mode) {
 		if (mode === "noFill") {
 			this.particles.noFill = true;
@@ -374,7 +373,7 @@ class ParticlesFactory {
 		this.getCanvasSize();
 	}
 
-	// --------------------------------------------------------------BEHAVIOUR
+	// BEHAVIOUR
 	// inner loop to get otherParticle - distance
 	// check for flags and recalculate/draw in case
 	#handleLinesAndCollision(particle, startIndex, len) {

@@ -22,7 +22,7 @@ No dependencies
 ## Features
 
 * Customizable Particles:<br>
-Define shapes (circle, square, rhombus, hexagon, triangle), sizes, speed and colors.
+Define shapes (circle, square, rhombus, hexagon, triangle, image), sizes, speed and colors.
 
 * Collision Detection:<br>
 Particles can interact with each other and respond to collisions.
@@ -96,6 +96,7 @@ Whether you pass your own config-Object or only pass some changes in an object t
 			draw: true,
 			collision: false,
 			opacity: 1,
+			imageSrc: null
 		},
 		lines: {
 			connectDistance: 100,
@@ -180,6 +181,7 @@ The above passed objects shows the defaultSettings.
   * draw: Whether to draw particles.<br>
   * collision: Whether to detect collisions.<br>
   * opacity: Opacity of particles.<br>
+  * imageSrc: The url to an image to use as shape
 
 * ### Lines
   * connectDistance: Distance within which lines are drawn between particles.<br>
@@ -203,6 +205,9 @@ Update the number of particles in the system.
 
   * setBaseSize(newBaseSize)<br>
 Adjust the new base size of all particles when they're set to randomSize.
+
+  * setImageSrc(newUrl)<br>
+  Create an image to render as particles if shape is set to image
 
   * toggleFullScreen()<br>
 Toggle between fullscreen mode and canvas size.
@@ -252,6 +257,7 @@ Handle the particle's behavior when the mouse moves nearby.
 </details>
 
 ---
+![particles-factory-image2](factory-img2.png)
 ## Contributing
 Contributions are welcome! Please submit issues or pull requests via GitHub. For more information on how to contribute, see CONTRIBUTING.md.
 
