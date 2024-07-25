@@ -52,4 +52,4 @@ function rotateImages() {
 }
 
 rotateImages();
-test.particles.shape="triangle"
+//test.particles.shape="triangle"

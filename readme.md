@@ -44,15 +44,21 @@ Start, stop, and adjust particle animation settings.
 You can install js-particles-factory via npm:
 
 ```
-npm install js-particles-factory
+npm i js-particles-factory --save
 ```
-(includes a *es.js gzip 3.5kb and a *umd.js gzip 3.26kb)
+
 Alternatively, include it directly in your HTML head with a script tag:
 ```
+//*.es.js - gzip 3.5kb
 <script type="module" src="https://cdn.jsdelivr.net/gh/BarbWire-1/js-particles-factory/minified/particles-factory.es.js"></script>
 
 ```
-or copy the [particle.factory.es.js](./minified/particles-factory.es.js) into your project and import **ParticlesFactory** directly.<br>
+Or try the umd.js - 3.26kb
+```
+// *.umd.js - gzip
+<script type="module" src="https://cdn.jsdelivr.net/gh/BarbWire-1/js-particles-factory/minified/particles-factory.umd.js"></script>
+```
+Else copy the [particle.factory.es.js](./minified/particles-factory.es.js) into your project and import **ParticlesFactory** directly.<br>
 
 
 ---
