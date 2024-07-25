@@ -6,12 +6,35 @@ const test = new ParticlesFactory({
 		//randomSize: false
 	}
 });
-//TODO not updating on runtime
 
-// hmmmm not updating on runtime...look where it sticks
 // TODO load the image once in factory and pass it the particleInstances in draw
-test.particles.imageSrc = ".public/assets/images/sunflower.png"
-test.setImageSrc("assets/images/sunflower.png")
+
+test.setImageSrc("assets/images/sunflower.png");
+test.setImageSrc("assets/images/snowFlake.png")
 
 // BUT can switch
 //test.particles.shape = 'triangle'
+
+let i = 0;
+let imageSwitchInterval;
+
+function rotateImages() {
+	const imageSources = [
+		"assets/images/smiley.png",
+		"assets/images/sunflower.png",
+		"assets/images/snowFlake.png"
+	];
+
+	imageSwitchInterval = setInterval(() => {
+		const newImageSrc = imageSources[ i++ % imageSources.length ];
+		test.setImageSrc(newImageSrc);
+	}, 5000);
+
+
+	setTimeout(() => {
+		clearInterval(imageSwitchInterval);
+		console.log("stopped img rotation");
+	}, 35000);
+}
+
+rotateImages();

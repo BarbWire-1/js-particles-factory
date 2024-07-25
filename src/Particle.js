@@ -53,7 +53,7 @@ export class Particle {
 				break;
 			case 'image':
 				if (this.imageLoaded && this.image) {
-					console.log('should draw image')
+					//console.log('should draw image')
 					this.drawImage(ctx, size);
 				}
 				break;
