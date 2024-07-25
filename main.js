@@ -1,4 +1,4 @@
-//import { ParticlesFactory } from './src/ParticlesFactory.js'; //- using cdn instead
+import { ParticlesFactory } from './src/ParticlesFactory.js'; //- using cdn instead
 const test = new ParticlesFactory({
 	particles: {
 		shape: 'image',
