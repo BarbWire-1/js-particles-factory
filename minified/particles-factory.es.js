@@ -16,7 +16,7 @@ class at {
   }
   drawParticle(t, i, s, a, n) {
     const h = this.ctx;
-    switch (n && (h.strokeStyle = n), h.globalAlpha = i, h.beginPath(), a) {
+    switch (n && (h.strokeStyle = n), h.globalAlpha = i, h.fillStyle = t, h.beginPath(), a) {
       case "circle":
         this.createCircle(h, s);
         break;

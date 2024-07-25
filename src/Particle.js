@@ -33,6 +33,8 @@ export class Particle {
 		const ctx = this.ctx;
 		strokeStyle && (ctx.strokeStyle = strokeStyle);
 		ctx.globalAlpha = opacity;
+		ctx.fillStyle = fillColor;
+		//console.log(this.fillStyle)
 		ctx.beginPath();
 
 		switch (shape) {
@@ -88,6 +90,7 @@ export class Particle {
 	createPolygon(ctx, size, sides, rotate, squeeze) {
 		const angle = (Math.PI * 2) / sides;
 		const radius = size / 2;
+
 
 		ctx.moveTo(
 			this.x + radius * Math.cos(rotate),
