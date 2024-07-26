@@ -1,22 +1,13 @@
 import { ParticlesFactory } from './minified/particles-factory.es.js'; //- using cdn instead
-const test = new ParticlesFactory({
-	particles: {
-		shape: 'image',
-		opacity: 1,
-		size: 80
-	},
-	lines: {
-		strokeStyle: "white",
-		lineWidth: .5,
-		opacity: 1
+//init with defaults
+const test = new ParticlesFactory();
 
-	}
-});
 // TESTING IMAGES
-let i = 0;
-let imageSwitchInterval;
+setTimeout(rotateImages, 5000);
 
 function rotateImages() {
+	test.particles.shape = "image";
+	test.particles.size = 80;
 	const rotations = {
 		'smiley': 'yellow',
 		'sunflower': 'limegreen',
@@ -46,10 +37,19 @@ function rotateImages() {
 	setTimeout(() => {
 		clearInterval(imageSwitchInterval);
 		console.log("stopped img rotation");
+		triangleConfiguration();
 	}, 5000 * num - 1);
 
 	updateImageAndColor();
 }
 
-rotateImages();
-//test.particles.shape="triangle"
+
+//set to any other configuration
+function triangleConfiguration() {
+	test.particles.shape = "triangle";
+	test.particles.fillStyle = test.main.fillStyle;
+	test.lines.strokeStyle = '#ffffff';
+	test.particles.collision = false;
+	test.setSpeed(2)// baseSpeed
+	test.setFillMode('fill') // common fil
+}

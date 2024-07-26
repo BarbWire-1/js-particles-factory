@@ -286,7 +286,7 @@ class ParticlesFactory {
 			ctx.stroke();
 		}
 	}
-
+//TODO add image here to centralise switches
 	// UPDATES
 	setFillMode(mode) {
 		if (mode === "noFill") {
